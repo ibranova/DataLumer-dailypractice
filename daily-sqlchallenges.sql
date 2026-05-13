@@ -26,3 +26,20 @@ FROM candidates
 where skill in ('Python', 'Tableau', 'PostgreSQL')
 GROUP BY candidate_id
 HAVING count(skill) = 3;
+
+-- Day 3: Page With No Likes
+/*
+Assume you're given two tables containing data about Facebook Pages and their respective likes (as in "Like a Facebook Page").
+
+Write a query to return the IDs of the Facebook pages that have zero likes.
+The output should be sorted in ascending order based on the page IDs.
+*/
+
+-- Query: 
+SELECT p.page_id
+FROM pages p
+FULL JOIN page_likes pl
+ON p.page_id = pl.page_id
+GROUP BY p.page_id
+HAVING COUNT(liked_date) = 0
+ORDER BY p.page_id ASC;
