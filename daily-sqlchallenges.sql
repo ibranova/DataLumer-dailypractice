@@ -43,3 +43,17 @@ ON p.page_id = pl.page_id
 GROUP BY p.page_id
 HAVING COUNT(liked_date) = 0
 ORDER BY p.page_id ASC;
+
+-- DAY 4:
+/*Tesla is investigating production bottlenecks and they need your help to extract the relevant data.
+ Write a query to determine which parts have begun the assembly process but are not yet finished.
+
+Assumptions:
+
+parts_assembly table contains all parts currently in production, each at varying stages of the assembly process.
+An unfinished part is one that lacks a finish_date.*/
+
+--Query:
+SELECT part, assembly_step
+FROM parts_assembly
+where finish_date IS NULL;
