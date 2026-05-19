@@ -57,3 +57,19 @@ An unfinished part is one that lacks a finish_date.*/
 SELECT part, assembly_step
 FROM parts_assembly
 where finish_date IS NULL;
+
+/* DAY5: NYT
+Assume you're given the table on user viewership categorised by device type where the three types are laptop, tablet, and phone.
+
+Write a query that calculates the total viewership for laptops and mobile devices where mobile is defined as the sum of tablet and phone viewership.
+ Output the total viewership for laptops as laptop_reviews and the total viewership for mobile devices as mobile_views.*/
+
+ -- Query:
+with cte AS (
+  SELECT 
+  CASE WHEN device_type = 'laptop' THEN 1 ELSE 0 END AS laptop_views, 
+  CASE WHEN device_type IN ('tablet', 'phone') THEN 1 ELSE 0 END AS mobile_views 
+FROM viewership
+)
+SELECT SUM(laptop_views) as laptop_views, SUM(mobile_views) as mobile_views
+from cte
